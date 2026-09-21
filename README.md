@@ -24,13 +24,10 @@ Not every analysis was run identically across every dataset and ancestry, and it
 |---|---|---|---|
 | Burden Test (SKAT / SKAT-O) | NBA + WGS | 8 of 11 | FIN, MDE, SAS excluded for insufficient N (`LOW_POWER`). Passing both Bonferroni (per-ancestry, p < 8.45e-6) and FDR-BH < 0.05, significant hits were found in AJ (NBA), AMR (NBA and WGS), and EUR (WGS only); AAC, AFR, CAH, CAS and EAS returned no significant hits in either dataset. |
 | Case-Control | WGS only | 8 of 11 | Same three ancestries excluded as `LOW_POWER`; NBA was not attempted for this step. |
-| VEP / CADD / Enformer | — | EUR only | Downstream functional annotation of the Tier 1 variants with convergent burden + case-control signal — see below for why the scope stops at EUR. |
+| VEP / CADD / Enformer | — | EUR only | Downstream functional annotation of the Tier 1 variants with convergent burden + case-control signal — |
 
 NBA's comparatively thin yield relative to WGS is expected rather than a processing artifact: the regions tested are non-coding, and an imputed genotyping array captures far fewer of the rare variants that fall inside them than whole-genome sequencing does.
 
-### Why functional annotation focuses on EUR
-
-Variant annotation (VEP, CADD, Enformer) was restricted to the EUR ancestry — the only one where burden and case-control signals actually converged. In EUR WGS, four regions (HAQER0382, HAQER0441, HAQER1191, HAQER1329) reached significance in both tests independently, yielding seven candidate variants that were taken forward for annotation. That agreement across two different statistical frameworks is what makes the EUR signal worth pursuing further.
 
 ## Data Statement
 
