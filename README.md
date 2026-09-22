@@ -53,13 +53,13 @@ Notebooks are numbered in the order they are meant to be run. Steps 6a and 6b bo
 
 | # | Notebook | Description |
 |---|----------|-------------|
-| 1 | `1_region_merge_clustering_GP2_R12.ipynb` | Takes the concatenated, GRCh38-lifted list from the five source studies and collapses overlapping intervals into non-redundant, unioned regions (one composite region per cluster of overlapping HARs), writing the result to a shared `HARS_files/HARs_merged` location that every downstream notebook reads from. |
-| 2 | `2_covariate_builder_GP2_R12.ipynb` | Builds a master `samplestokeep` list restricted to confirmed PD/Control individuals, then produces per-ancestry `samplestokeep` and covariate files (SEX, AGE, up to 10 PCs) cross-checked against it — the fix for a data-lineage bug in the original GP2 template, where `samplestokeep` was never filtered by phenotype and silently included Unknown/Other individuals in downstream MAF and genotype calculations. |
-| 3 | `3_region_extractor_GP2_R12.ipynb` | Extracts a per-region VCF for each HAR × ancestry × dataset combination via `plink2`, reading the union region list from step 1's shared location (and failing explicitly if it isn't there yet) and restricting samples to the Covariate Builder's `samplestokeep` files. |
-| 4 | `4_burden_test_GP2_R12.ipynb` | Runs RVTests (v2.1.0) SKAT/SKAT-O rare-variant burden tests per HAR per ancestry, on both NBA and WGS, at multiple MAF thresholds (1%, 3%). Includes Bonferroni (α = 0.05 / 5,915 ≈ 8.45e-6) and FDR-BH correction, plus λ<sub>GC</sub> diagnostics. See the analytical scope table above for per-ancestry, per-dataset results. |
-| 5 | `5_case_control_GP2_R12.ipynb` | Runs `plink2 --glm firth-fallback` case-control association per HAR per ancestry, on the WGS dataset. Includes FDR-BH correction and genomic inflation factor (λ<sub>GC</sub>) diagnostics. See the analytical scope table above for which ancestries this covers. |
+| 1 | `1_region_merge_clustering_GP2_R12.ipynb` | Takes the concatenated, GRCh38-lifted list from the five source studies and collapses overlapping intervals into unioned regions (one composite region per cluster of overlapping HARs), writing the result to a shared `HARS_files/HARs_merged` location that every downstream notebook reads from. |
+| 2 | `2_covariate_builder_GP2_R12.ipynb` | Builds a master `samplestokeep` list restricted to confirmed PD/Control individuals, then produces per-ancestry `samplestokeep` and covariate files (SEX, AGE, up to 10 PCs). |
+| 3 | `3_region_extractor_GP2_R12.ipynb` | Extracts a per-region VCF for each HAR × ancestry × dataset combination via `plink2`, reading the union region list from step 1's and restricting samples to the Covariate Builder's `samplestokeep` files. |
+| 4 | `4_burden_test_GP2_R12.ipynb` | Runs RVTests (v2.1.0) SKAT/SKAT-O rare-variant burden tests per HAR per ancestry, on both NBA and WGS, at multiple MAF thresholds (1%, 3%). Includes Bonferroni (α = 0.05 / 5,915 ≈ 8.45e-6) and FDR-BH correction. |
+| 5 | `5_case_control_GP2_R12.ipynb` | Runs `plink2 --glm firth-fallback` case-control association per HAR per ancestry, on the WGS dataset. |
 | 6a | `6a_annotation_vep_cadd_GP2_R12.ipynb` | Functionally annotates the EUR Tier 1 variants (convergent burden + case-control signal) using the Ensembl VEP REST API (regulatory features, transcription-factor motif effects) and CADD v1.7 deleteriousness scores. |
-| 6b | `6b_annotation_enformer_GP2_R12.ipynb` | Predicts the regulatory effect (REF vs. ALT) of the same Tier 1 variants using Enformer, scoring ~5,300 regulatory tracks (DNase, H3K27ac, H3K4me1, RNA-seq) at 128 bp resolution to flag which variants strengthen or weaken nearby regulatory activity. Written for a GPU runtime (e.g., Colab with a T4). |
+| 6b | `6b_annotation_enformer_GP2_R12.ipynb` | Predicts the regulatory effect (REF vs. ALT) of the same Tier 1 variants using Enformer. |
 
 ## Ancestry Labels
 
