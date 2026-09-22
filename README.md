@@ -53,7 +53,7 @@ Notebooks are numbered in the order they are meant to be run. Steps 6a and 6b bo
 
 | # | Notebook | Description |
 |---|----------|-------------|
-| 1 | `1_region_merge_clustering_GP2_R12.ipynb` | Takes the concatenated, GRCh38-lifted list from the five source studies and collapses overlapping intervals into unioned regions (one composite region per cluster of overlapping HARs), writing the result to a shared `HARS_files/HARs_merged` location that every downstream notebook reads from. |
+| 1 | `1_region_merge_clustering_GP2_R12.ipynb` | Takes the concatenated, GRCh38-lifted list from the five source studies and collapses overlapping intervals into merge región. |
 | 2 | `2_covariate_builder_GP2_R12.ipynb` | Builds a master `samplestokeep` list restricted to confirmed PD/Control individuals, then produces per-ancestry `samplestokeep` and covariate files (SEX, AGE, up to 10 PCs). |
 | 3 | `3_region_extractor_GP2_R12.ipynb` | Extracts a per-region VCF for each HAR × ancestry × dataset combination via `plink2`, reading the union region list from step 1's and restricting samples to the Covariate Builder's `samplestokeep` files. |
 | 4 | `4_burden_test_GP2_R12.ipynb` | Runs RVTests (v2.1.0) SKAT/SKAT-O rare-variant burden tests per HAR per ancestry, on both NBA and WGS, at multiple MAF thresholds (1%, 3%). Includes Bonferroni (α = 0.05 / 5,915 ≈ 8.45e-6) and FDR-BH correction. |
