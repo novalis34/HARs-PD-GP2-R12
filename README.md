@@ -9,11 +9,11 @@ This is the online repository for the manuscript titled "Human Specific Regulato
 
 The regions tested here are not a single published list but a compiled panel drawn from five studies that each define "accelerated" non-coding regions under a different evolutionary lens. Each source was downloaded as supplementary material from its original paper and lifted from its native genome build to GRCh38 with the UCSC Genome Browser's LiftOver tool.
 
-1 **HARs** (Girskis et al., 2021) — Regions implicated in the rewiring of neurodevelopmental gene regulation during human corticogenesis.
-2 **zooHARs** (Keough et al., 2023) — Regions refined through multi-species alignment by the Zoonomia Consortium, enriched for 3D chromatin interactions near neurodevelopmental loci.
-3 **linHARs** (Bi et al., 2023) — Lineage-specific accelerated elements identified through comparative primate genomics.
-4 **HAQERs** (Mangan et al., 2022) — Regions that diverge quickly from the Human-Chimpanzee Ancestor without requiring prior vertebrate conservation.
-5 **HARs** (Capra et al., 2013) — Classical HARs found by scanning for vertebrate-conserved loci with an accelerated substitution rate in humans.
+1- **HARs** (Girskis et al., 2021) — Regions implicated in the rewiring of neurodevelopmental gene regulation during human corticogenesis.
+2- **zooHARs** (Keough et al., 2023) — Regions refined through multi-species alignment by the Zoonomia Consortium, enriched for 3D chromatin interactions near neurodevelopmental loci.
+3- **linHARs** (Bi et al., 2023) — Lineage-specific accelerated elements identified through comparative primate genomics.
+4- **HAQERs** (Mangan et al., 2022) — Regions that diverge quickly from the Human-Chimpanzee Ancestor without requiring prior vertebrate conservation.
+5- **HARs** (Capra et al., 2013) — Classical HARs found by scanning for vertebrate-conserved loci with an accelerated substitution rate in humans.
 
 ### Pipeline
 
