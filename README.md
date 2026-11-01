@@ -21,7 +21,7 @@ The pipeline tests this region set for association with PD case-control status a
 
 | Analysis | Dataset(s) | Ancestries | Notes |
 |---|---|---|---|
-| Burden Test (SKAT / SKAT-O) | NBA + WGS | 8 of 11 | FIN, MDE, SAS excluded for insufficient N (`LOW_POWER`). Hits were identified after both Bonferroni and FDR-BH correction, with significant findings observed in EUR ancestries (WGS only). |
+| Burden Test (SKAT / SKAT-O) | NBA + WGS | 8 of 11 | FIN, MDE, SAS excluded for insufficient N (`LOW_POWER`). Hits were identified after both Bonferroni and FDR-BH correction. |
 | Case-Control | WGS only | 10 of 11 | FIN gave no results; NBA was not attempted for this step. |
 | Convergent variants | WGS | EUR only | Regions passing both Bonferroni and FDR-BH in the burden test and in case-control. |
 | LD and conditional analysis | WGS | EUR only | Case-control hits in convergent regions with more than one hit. |
