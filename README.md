@@ -1,4 +1,3 @@
-[README .md](https://github.com/user-attachments/files/33030927/README.md)
 # HARs-PD-GP2-R12
 
 ## Summary
@@ -23,9 +22,10 @@ The pipeline tests this region set for association with PD case-control status a
 | Analysis | Dataset(s) | Ancestries | Notes |
 |---|---|---|---|
 | Burden Test (SKAT / SKAT-O) | NBA + WGS | 8 of 11 | FIN, MDE, SAS excluded for insufficient N (`LOW_POWER`). Hits were identified after both Bonferroni and FDR-BH correction, with significant findings observed in EUR ancestries (WGS only). |
-| Case-Control | WGS only | 8 of 11 | Same three ancestries excluded as `LOW_POWER`; NBA was not attempted for this step. |
+| Case-Control | WGS only | 10 of 11 | FIN gave no results; NBA was not attempted for this step. |
 | Convergent variants | WGS | EUR only | Regions passing both Bonferroni and FDR-BH in the burden test and in case-control. |
-| Annotation: VEP / CADD / Enformer | — | EUR only | Downstream functional annotation of the convergent variants. |
+| LD and conditional analysis | WGS | EUR only | Case-control hits in convergent regions with more than one hit. |
+| Annotation: VEP / CADD | — | EUR only | Downstream functional annotation of the convergent variants. |
 
 
 ## Data Statement
@@ -46,24 +46,24 @@ HARs-PD-GP2-R12/
         ├── 4_burden_test_GP2_R12.ipynb
         ├── 5_case_control_GP2_R12.ipynb
         ├── 6_convergent_variants_GP2_R12.ipynb
-        ├── 7a_annotation_vep_cadd_GP2_R12.ipynb
-        └── 7b_annotation_enformer_GP2_R12.ipynb
+        ├── 6b_ld_conditional_analysis_GP2_R12.ipynb
+        └── 7_annotation_vep_cadd_GP2_R12.ipynb
 ```
 
 ## Analysis Notebooks
 
-Notebooks are numbered in the order they are meant to be run. Steps 7a and 7b both build on the convergent variant set from step 6 and can be run independently of each other.
+Notebooks are numbered in the order they are meant to be run. Steps 6b and 7 both build on the convergent variant set from step 6 and can be run independently of each other.
 
 | # | Notebook | Description |
 |---|----------|-------------|
 | 1 | `1_region_merge_clustering_GP2_R12.ipynb` | Takes the concatenated, GRCh38-lifted list from the five source studies and collapses overlapping intervals into merged regions. |
 | 2 | `2_covariate_builder_GP2_R12.ipynb` | Builds a master `samplestokeep` list restricted to confirmed PD/Control individuals, then produces per-ancestry `samplestokeep` and covariate files (SEX, AGE, up to 10 PCs). |
 | 3 | `3_region_extractor_GP2_R12.ipynb` | Extracts a region VCF for each HAR × ancestry × dataset combination via `plink2`, reading the union region list from step 1 and restricting samples to the Covariate Builder's `samplestokeep` files. |
-| 4 | `4_burden_test_GP2_R12.ipynb` | Runs RVTests (v2.1.0) SKAT/SKAT-O rare variant burden tests per HAR per ancestry, on both NBA and WGS, at multiple MAF thresholds (1%, 3%). Includes Bonferroni and FDR-BH correction. Exploratory analysis; only the first five PCs (PC1–PC5) were included|
+| 4 | `4_burden_test_GP2_R12.ipynb` | Runs RVTests (v2.1.0) SKAT/SKAT-O rare variant burden tests per HAR per ancestry, on both NBA and WGS, at multiple MAF thresholds (1%, 3%). Includes Bonferroni and FDR-BH correction. Exploratory analysis; only the first five PCs (PC1–PC5) were included. |
 | 5 | `5_case_control_GP2_R12.ipynb` | Runs `plink2 --glm firth-fallback` case-control association per HAR per ancestry, on the WGS dataset. Exploratory analysis; only the first five PCs (PC1–PC5) were included. |
 | 6 | `6_convergent_variants_GP2_R12.ipynb` | Selects the EUR regions that pass Bonferroni and FDR-BH in both the burden test and case-control and saves their significant variants together with the best burden result for each region. |
-| 7a | `7a_annotation_vep_cadd_GP2_R12.ipynb` | Functionally annotates the EUR convergent variants using the Ensembl VEP REST API (regulatory features, transcription-factor motif effects) and CADD v1.7 deleteriousness scores. |
-| 7b | `7b_annotation_enformer_GP2_R12.ipynb` | Predicts the regulatory effect (REF vs. ALT) of the same variants using Enformer. Runs in Google Colab (GPU), taking the annotation table from step 7a as input. |
+| 6b | `6b_ld_conditional_analysis_GP2_R12.ipynb` | For the EUR convergent regions with more than one case-control hit, computes the r² between the hits and a conditional P-value for each one (`plink2 --glm --condition-list`). |
+| 7 | `7_annotation_vep_cadd_GP2_R12.ipynb` | Functionally annotates the EUR convergent variants using the Ensembl VEP REST API (regulatory features, transcription-factor motif effects) and CADD v1.7 deleteriousness scores. |
 
 ## Ancestry Labels
 
@@ -87,11 +87,10 @@ Ancestry definitions follow the [GP2 harmonized ancestry labels](https://gp2.org
 
 | Tool | Version | Use |
 |------|---------|-----|
-| plink2 | latest | Region extraction, case-control GLM association |
+| plink2 | latest | Region extraction, case-control GLM association, LD and conditional analysis |
 | RVTests | v2.1.0 | SKAT / SKAT-O rare-variant burden tests |
 | Ensembl VEP (REST API) | GRCh38 | Functional/regulatory variant annotation |
 | CADD | v1.7 (GRCh38) | Variant deleteriousness scoring |
-| Enformer | DeepMind, 2021 | Sequence-based prediction of regulatory-track effects (REF vs. ALT) |
 | Python | 3.12 | Pipeline orchestration, statistics (pandas, numpy, statsmodels) |
 
 ## Notes on Reproducibility
